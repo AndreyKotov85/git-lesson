@@ -1,0 +1,9 @@
+import sqlite3
+
+def main():  
+con = sqlite3.connect('test.db')  
+cur = con.cursor()  
+cur.execute('Select SQLite_Version')  
+data = cur.fetchone()   
+print ("SQLite version:") + data  
+con.close()
