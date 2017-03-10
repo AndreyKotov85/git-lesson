@@ -1,9 +1,37 @@
-import sqlite3
+import sqlite3 
 
-def main():  
-con = sqlite3.connect('test.db')  
-cur = con.cursor()  
-cur.execute('Select SQLite_Version')  
-data = cur.fetchone()   
-print ("SQLite version:") + data  
-con.close()
+import datetime  
+
+SQL_SELECT = '''     
+    SELECT      
+     id, task, task_time, created    
+    FROM       
+     organizer    
+'''     
+
+def dict_factory(cursor,row): # словарь     
+    d = {}     
+    for i, col in enumerate(cursor.description):        
+        d[col[0]] = row[i]         
+        return d   
+def connect(db_name=None):    
+    if db_name is None:         
+       db_name = ':memory:'      
+    conn = sqlite3.connect(db_name)     
+    conn.row_factory = dict_factory    
+    return conn  
+    
+#with conn: 
+#cur = conn.cursor()   
+
+def initialize(conn):#создает запросы.    
+with conn:         
+    cursor = conn.executescript('''         
+    CREATE TABLE IF NOT EXISTS organizer (         
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,        
+    task_name TEXT NOT NULL DEFAULT '',        
+    task_edit TEXT NOT NULL DEFAULT '',        
+    task_time DATETIME,        
+    task_status INTEGER NOT NULL DEFAULT 0,         
+    created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP)        
+    ''') 
