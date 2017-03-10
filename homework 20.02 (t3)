@@ -1,0 +1,15 @@
+array = [1, 2, 0, 3, 18, 14, 89, 45, 100, 0, 4]  
+len_arr = len(array)  
+a = 0  
+b = 0  
+
+while i < len_arr:      
+    b = a + 1      
+    while b < len_arr:         
+        if array[b] < array[a]:              
+            tmp = array[a]              
+            array[a] = array[b]              
+            array[b] = tmp          
+        b += 1      
+    a += 1  
+print(array) 
