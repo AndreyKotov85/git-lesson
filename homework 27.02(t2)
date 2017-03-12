@@ -1,0 +1,18 @@
+def Palindrom(zif):
+    s = list(zif)
+    e = s
+
+
+    f = []
+    for s in reversed(s):
+        f.append(s)
+
+
+    print(e, f)
+    if e == f:
+        print('это палиндром')
+    else: print('это не Палиндром')
+
+
+palin = input('Введите значение: ')
+Palindrom(palin)
