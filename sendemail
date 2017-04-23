@@ -1,0 +1,15 @@
+import smtplib 
+
+content = 'Test Email Arrived'
+
+mail = smtplib.SMTP('smtp.gmail.com',587)
+
+mail.ehlo()
+
+mail.starttls()
+
+mail.login('akotov.uni@gmail.com','Uni2017per')
+
+mail.sendmail('akotov.uni@gmail.com','receiver',content)
+
+mail.close()
